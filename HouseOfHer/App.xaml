@@ -1,0 +1,21 @@
+﻿<!-- Bishmillah -->
+<Application x:Class="HouseOfHer.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="Views/MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="Themes/ListBoxTheme.xaml"/>
+                <ResourceDictionary Source="Themes/SettingsButtonTheme.xaml"/>
+                <ResourceDictionary Source="Themes/CloseButtonTheme.xaml"/>
+                <ResourceDictionary Source="Themes/SubmitButtonTheme.xaml"/>
+                <ResourceDictionary Source="Themes/TextBoxTheme.xaml"/>
+                <ResourceDictionary Source="Themes/BigTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="Themes/PasswordBoxTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
+<!-- Elhamdulillah -->
