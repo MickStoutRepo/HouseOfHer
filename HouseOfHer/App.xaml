@@ -6,6 +6,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/TextBlockTheme.xaml"/>
+                <ResourceDictionary Source="Themes/TextBlockThemeHeader.xaml"/>
                 <ResourceDictionary Source="Themes/MenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="Themes/ListBoxTheme.xaml"/>
                 <ResourceDictionary Source="Themes/SettingsButtonTheme.xaml"/>

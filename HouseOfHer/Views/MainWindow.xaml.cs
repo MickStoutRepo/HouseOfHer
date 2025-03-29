@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using HouseOfHer.Views;
+using Newtonsoft.Json;
 
 namespace HouseOfHer
 {
@@ -14,7 +15,55 @@ namespace HouseOfHer
         public MainWindow()
         {
             InitializeComponent();
+            LoadAppointments();
+            UpdateDateView();
             Console.WriteLine("MainWindow initialized.");
+        }
+        
+        private void LoadAppointments()
+        {
+            string json = File.ReadAllText("agenda.json");
+            Appointments = JsonConvert.DeserializeObject<List<Appointment>>(json);
+        }
+        
+        private void SaveAppointments()
+        {
+            string json = JsonConvert.SerializeObject(Appointments, Formatting.Indented);
+            File.WriteAllText("agenda.json", json);
+        }
+        
+        private void UpdateDateView()
+        {
+            DateTime selectedDate = CalendarControl.SelectedDate ?? DateTime.Now;
+            DateViewTextBlock.Text = selectedDate.ToString("d");
+
+            var appointment = Appointments.FirstOrDefault(a => a.Date.Date == selectedDate.Date);
+            if (appointment != null)
+            {
+                var descriptions = appointment.Description
+                    .Where(d => !string.IsNullOrEmpty(d.Value))
+                    .Select(d => $"{d.Key}: {d.Value}");
+
+                DateViewContentBlock.Text = string.Join("\n", descriptions);
+            }
+            else
+            {
+                DateViewContentBlock.Text = "Geen afspraken voor deze datum.";
+            }
+        }
+        
+        public class Appointment
+        {
+            public DateTime Date { get; set; }
+            public Dictionary<string, string> Description { get; set; }
+        }
+
+        public List<Appointment> Appointments { get; set; }
+        
+        private void myCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            LoadAppointments();
+            UpdateDateView();
         }
         
         static class Navigator
@@ -67,6 +116,7 @@ namespace HouseOfHer
                 Application.Current.Shutdown();
             }
         }
+        
     }
 }
 // Elhamdulillah //

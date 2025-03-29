@@ -6,26 +6,52 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
       Height="450" Width="800">
-    <Grid Background="white">
-        <StackPanel>
-            <TextBlock HorizontalAlignment="Center">Datum:</TextBlock>
-            <ComboBox ItemsSource="{Binding Dates}" 
-                      SelectedItem="{Binding SelectedDate}" 
-                      Width="200"
-                      Margin="0,0,0,10"/>
-            <TextBlock HorizontalAlignment="Center">Tijd:</TextBlock>
-            <ComboBox ItemsSource="{Binding Times}" 
-                      SelectedItem="{Binding SelectedTime}" 
-                      Width="200"
-                      Margin="0,0,0,10"/>
-            <TextBlock HorizontalAlignment="Center">Agendapunt:</TextBlock>
-            <TextBox Text="{Binding Text}"
-                     Style="{StaticResource TextBoxTheme}"
-                     Width="400"
-                     Margin="0,0,0,40"/>
-            <Button Command="{Binding SaveCommand}" Content="Save"
-                    Style="{StaticResource SubmitButtonTheme}"/>
+    <Grid Background="Transparent">
+        <Grid HorizontalAlignment="Center"
+              VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal"
+                        VerticalAlignment="Top"
+                        Margin="10,10,0,0">
+            <TextBlock VerticalAlignment="Center">Selecteer een datum:</TextBlock>
+            <DatePicker x:Name="datePicker"
+                        Text="Selecteer een datum"
+                        BorderBrush="#333333"
+                        Width="200"
+                        Margin="15,0,0,0"/>
         </StackPanel>
+        <StackPanel Grid.Row="1" 
+                    Orientation="Horizontal"
+                    VerticalAlignment="Top"
+                    Margin="10,10,0,0">
+            <TextBlock VerticalAlignment="Center">Selecteer een tijd:</TextBlock>
+            <ComboBox x:Name="timeComboBox" 
+                      Margin="31,0,0,0" 
+                      Width="200"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" 
+                    Orientation="Horizontal"
+                    VerticalAlignment="Top"
+                    Margin="10,10,0,0">
+            <TextBlock VerticalAlignment="Center">Agendaitem:</TextBlock>
+            <TextBox x:Name="descriptionTextBox" 
+                     Margin="15,0,0,0" 
+                     Width="243"
+                     Style="{StaticResource TextBoxTheme}"/>
+        </StackPanel>
+        <Button Grid.Row="3" Content="Toevoegen" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Margin="100,0,0,0" 
+                Click="AddToJson_Click"
+                Style="{StaticResource SubmitButtonTheme}"/>
+        </Grid>
     </Grid>
 </ContentControl>
 <!-- Elhamdulillah -->

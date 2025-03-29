@@ -6,7 +6,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
       Height="450" Width="600">
-    <Grid Background="White">
+    <Grid Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="300"/>
@@ -24,8 +24,8 @@
                     Margin="10,0,10,10">
                 <ListBox Name="Maaltijdenlijst" 
                         SelectionChanged="ListBox_SelectionChanged"
-                        BorderThickness="1"
-                        BorderBrush="Transparent"
+                        BorderThickness="0"
+                        Background="Transparent"
                         MaxHeight="200"
                         MinHeight="200">
                 </ListBox>
@@ -52,8 +52,10 @@
                     BorderBrush="#333333" 
                     BorderThickness="1"
                     Margin="10,0,10,10"
-                    Height="200">
-                <ContentControl Name="MaaltijdenControl"></ContentControl>
+                    Height="200"
+                    Width="280">
+                <ContentControl Name="MaaltijdenControl"
+                                MaxWidth="280"></ContentControl>
             </Border>
         </StackPanel>
     </Grid>

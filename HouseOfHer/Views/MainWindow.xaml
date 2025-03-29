@@ -4,8 +4,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:local="clr-namespace:HouseOfHer.Models"
-        xmlns:global="clr-namespace:"
-        xmlns:viewModels="clr-namespace:HouseOfHer.ViewModels"
         Title="Template" Height="1000" Width="1000"
         WindowStyle="None"
         ResizeMode="NoResize"
@@ -13,9 +11,6 @@
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown">
-        <Window.DataContext>
-            <viewModels:MainViewModel/>
-        </Window.DataContext>
     <Window.Resources>
         <DataTemplate DataType="{x:Type local:AgendaItem}">
             <StackPanel>
@@ -184,7 +179,7 @@
                     <RowDefinition Height="550"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Border BorderBrush="#34143e" 
+                <Border BorderBrush="#333333" 
                         Grid.Row="0"
                         BorderThickness="1" 
                         Padding="20" 
@@ -199,26 +194,58 @@
                         </LinearGradientBrush>
                         </Border.Background>
                     <Border.Effect>
-                        <DropShadowEffect Color="#34143e" 
+                        <DropShadowEffect Color="#333333" 
                                           BlurRadius="10" 
                                           ShadowDepth="5" 
                                           Opacity="0.5"/>
                     </Border.Effect>
                     
             </Border>
-                <Grid>
+                <Grid Grid.Row="0"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Margin="0,0,25,0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="300"/>
-                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition Width="380"/>
+                        <ColumnDefinition Width="380"/>
                     </Grid.ColumnDefinitions>
-                    <Viewbox Grid.Row="0" 
-                             Stretch="Fill"
-                             Height="250"
-                             Margin="20,0,20,0">
-                        <Calendar></Calendar>
-                    </Viewbox>
+                    <StackPanel Grid.Column="0"
+                                Height="250"
+                                VerticalAlignment="Center"
+                                Margin="0,0,0,0">
+                        <Viewbox Height="300"
+                                 HorizontalAlignment="Left"
+                                 Margin="20,0,0,0">
+                            <Calendar
+                                SelectedDatesChanged="myCalendar_SelectedDatesChanged"
+                                x:Name="CalendarControl"
+                                BorderThickness="0"
+                                BorderBrush="Transparent"
+                                Background="Transparent"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left"
+                                Height="200"
+                                Margin="0,0,0,0">
+                            </Calendar>
+                        </Viewbox>
+                    </StackPanel>
+                    <Border Grid.Column="1"
+                            BorderBrush="#333333"
+                            BorderThickness="1"
+                            CornerRadius="10"
+                            Height="230"
+                            Width="350">
+                    <StackPanel Height="250">
+                    <TextBlock x:Name="DateViewTextBlock"
+                               VerticalAlignment="Top"
+                               Style="{StaticResource TextBlockThemeHeader}">Text</TextBlock>
+                    <TextBlock x:Name="DateViewContentBlock"
+                               VerticalAlignment="Top"
+                               Style="{StaticResource TextBlockTheme}">Text</TextBlock>
+                    </StackPanel>
+                        </Border>
                 </Grid>
-                <Border BorderBrush="#34143e" 
+                <Border BorderBrush="#333333" 
                         Grid.Row="1"
                         BorderThickness="1" 
                         Padding="20" 
@@ -233,7 +260,7 @@
                         </LinearGradientBrush>
                     </Border.Background>
                     <Border.Effect>
-                        <DropShadowEffect Color="#34143e" 
+                        <DropShadowEffect Color="#333333" 
                                           BlurRadius="10" 
                                           ShadowDepth="5" 
                                           Opacity="0.5"/>
