@@ -46,18 +46,21 @@
                     Click="VoegMaaltijdToe_Click"
                     Style="{StaticResource SubmitButtonTheme}"/>
         </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="0">
-            <TextBlock HorizontalAlignment="Center">Ingredienten</TextBlock>
-            <Border CornerRadius="4" 
-                    BorderBrush="#333333" 
-                    BorderThickness="1"
-                    Margin="10,0,10,10"
-                    Height="200"
-                    Width="280">
-                <ContentControl Name="MaaltijdenControl"
-                                MaxWidth="280"></ContentControl>
-            </Border>
-        </StackPanel>
+        <TextBlock Grid.Column="1"  HorizontalAlignment="Center">Ingredienten</TextBlock>
+        <Border  Grid.Column="1" 
+                            CornerRadius="4" 
+                            BorderBrush="#333333" 
+                            BorderThickness="1"
+                            Margin="10,15,10,10"
+                            Height="200"
+                            Width="280">
+        <StackPanel>
+            <TextBlock x:Name="MaaltijdViewContentBlock"
+                       VerticalAlignment="Top"
+                       TextWrapping="Wrap"
+                       Style="{StaticResource TextBlockTheme}"></TextBlock>
+            </StackPanel>
+        </Border>
     </Grid>
 </ContentControl>
 <!-- Elhamdulillah -->

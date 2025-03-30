@@ -11,7 +11,7 @@ namespace HouseOfHer.Views
     public partial class Maaltijden : ContentControl
     {
         private const string FilePath = "maaltijden.json";
-        private Dictionary<string, string> maaltijdenIngrediënten = new Dictionary<string, string>();
+        private Dictionary<string, Dictionary<string, string>> maaltijdenIngrediënten = new Dictionary<string, Dictionary<string, string>>();
 
         public Maaltijden()
         {
@@ -24,7 +24,7 @@ namespace HouseOfHer.Views
             if (File.Exists(FilePath))
             {
                 string json = File.ReadAllText(FilePath);
-                maaltijdenIngrediënten = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
+                maaltijdenIngrediënten = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, string>>>(json);
                 foreach (var maaltijd in maaltijdenIngrediënten.Keys)
                 {
                     Maaltijdenlijst.Items.Add(new ListBoxItem { Content = maaltijd });
@@ -33,11 +33,35 @@ namespace HouseOfHer.Views
             else
             {
                 // Voeg standaard maaltijden toe als het bestand niet bestaat
-                maaltijdenIngrediënten = new Dictionary<string, string>
+                maaltijdenIngrediënten = new Dictionary<string, Dictionary<string, string>>
                 {
-                    { "Aardappel Tortilla", "Ingrediënten: Aardappelen, Eieren, Ui, Olijfolie, Zout" },
-                    { "Surimi en Mihoen", "Ingrediënten: Surimi, Mihoen, Groenten, Sojasaus, Sesamolie" },
-                    { "Vis Pasta", "Ingrediënten: Pasta, Vis, Tomatensaus, Knoflook, Olijfolie" }
+                    { "Aardappel Tortilla", new Dictionary<string, string>
+                        {
+                            { "1", "Aardappelen" },
+                            { "2", "Eieren" },
+                            { "3", "Ui" },
+                            { "4", "Olijfolie" },
+                            { "5", "Zout" }
+                        }
+                    },
+                    { "Surimi en Mihoen", new Dictionary<string, string>
+                        {
+                            { "1", "Surimi" },
+                            { "2", "Mihoen" },
+                            { "3", "Groenten" },
+                            { "4", "Sojasaus" },
+                            { "5", "Sesamolie" }
+                        }
+                    },
+                    { "Vis Pasta", new Dictionary<string, string>
+                        {
+                            { "1", "Pasta" },
+                            { "2", "Vis" },
+                            { "3", "Tomatensaus" },
+                            { "4", "Knoflook" },
+                            { "5", "Olijfolie" }
+                        }
+                    }
                 };
                 SaveMaaltijden();
                 LoadMaaltijden();
@@ -57,7 +81,8 @@ namespace HouseOfHer.Views
                 string selectedMaaltijd = ((ListBoxItem)Maaltijdenlijst.SelectedItem).Content.ToString();
                 if (maaltijdenIngrediënten.ContainsKey(selectedMaaltijd))
                 {
-                    MaaltijdenControl.Content = maaltijdenIngrediënten[selectedMaaltijd];
+                    var ingrediënten = maaltijdenIngrediënten[selectedMaaltijd];
+                    MaaltijdViewContentBlock.Text = string.Join(Environment.NewLine, ingrediënten.Values);
                 }
             }
         }
@@ -71,7 +96,14 @@ namespace HouseOfHer.Views
             {
                 if (!maaltijdenIngrediënten.ContainsKey(nieuweMaaltijdNaam))
                 {
-                    maaltijdenIngrediënten.Add(nieuweMaaltijdNaam, nieuweMaaltijdIngrediënten);
+                    var ingrediëntenArray = nieuweMaaltijdIngrediënten.Split(',');
+                    var ingrediëntenDict = new Dictionary<string, string>();
+                    for (int i = 0; i < ingrediëntenArray.Length; i++)
+                    {
+                        ingrediëntenDict[(i + 1).ToString()] = ingrediëntenArray[i].Trim();
+                    }
+
+                    maaltijdenIngrediënten.Add(nieuweMaaltijdNaam, ingrediëntenDict);
                     Maaltijdenlijst.Items.Add(new ListBoxItem { Content = nieuweMaaltijdNaam });
                     SaveMaaltijden();
                     NieuweMaaltijdNaam.Clear();
