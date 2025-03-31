@@ -50,4 +50,31 @@ ________________________________________________________________________
 string json = JsonConvert.SerializeObject(dataList, Formatting.Indented);<br>
 <br>
 File.WriteAllText(pad/naar/file.json, json);<br>
-}</code><br><br>
+}</code><br>
+________________________________________________________________________
+# Public class 
+<code>public class KlasseNaam<br>
+{<br>
+public DateTime Date { get; set; }<br>
+public Dictionary<string, string> Description { get; set; }<br>
+<br>
+// Constructor van variabelen //<br>
+public Appointment(DateTime date, Dictionary<string, string> description)<br>
+{<br>
+Date = date;<br>
+Description = description;<br>
+}<br>
+public void AddDescription(string key, string value)<br>
+</code>
+<br>
+Onderdelen:<br>
+<br>
+<b>Date:</b><br><br>
+<b>Type:</b> DateTime<br>
+Dit is een eigenschap die de datum en tijd van de afspraak opslaat.<br>
+public DateTime Date { get; set; } betekent dat deze eigenschap publiek toegankelijk is en zowel gelezen als geschreven kan worden.<br><br>
+<b>Description:</b><br><br>
+<b>Type</b>: Dictionary<string, string><br>
+Dit is een eigenschap die beschrijvingen van de afspraak opslaat in een woordenboek (dictionary) met sleutels en waarden van het type string.<br>
+public Dictionary<string, string> Description { get; set; } betekent dat deze eigenschap ook publiek toegankelijk is en zowel gelezen als geschreven kan worden.<br>
+________________________________________________________________________
